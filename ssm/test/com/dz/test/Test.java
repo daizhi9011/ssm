@@ -30,7 +30,7 @@ public class Test {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
 			Person person = (Person) session.selectOne(
-					"com.dz.mybatis.entity.PersonMapper.selectPersonByID", 1);
+					"com.dz.mybatis.entity.Person.selectPersonByID", 1);
 			System.out.println(person.getAddress());
 			System.out.println(person.getName());
 		} finally {
