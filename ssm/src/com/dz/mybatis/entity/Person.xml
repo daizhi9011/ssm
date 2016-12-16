@@ -2,8 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dz.mybatis.entity.Person">
-    <select id="selectPersonByID" parameterType="int" resultType="Person">
-        select * from person where id = #{id}
-    </select>
+<!-- 用SqlSession实例来直接执行已映射的SQL语句：session.selectOne("com.dz.mybatis.entity.Person.selectUserByID",1) -->
+<!-- <mapper namespace="com.dz.mybatis.entity.Person"> 
+		<select id="selectPersonByID" parameterType="int" resultType="Person" > 
+		select * from person where id = #{id} </select>
+	 </mapper> -->
+
+<!-- 以接口的方式进行编程时，要将上面的mapper改成如下形式，注意，在实际编程时，二者只能有一个 -->
+<mapper namespace="com.dz.mybatis.dao.IPersonDao">
+	<!-- 为了返回list 类型而自定义定义的returnMap -->
+    <resultMap type="Person" id="resultListPerson" autoMapping="false">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="age" property="age" />
+        <!-- <result column="address" property="address" /> -->
+    </resultMap>
+	<select id="selectPersonByID" parameterType="int" resultType="Person">
+		select * from person where id = #{id}
+	</select>
+	<select id="selectAllPersonMap" resultMap="resultListPerson">
+		select * from person
+	</select>
+	<select id="selectAllPersonType" resultType="Person">
+		select * from person
+	</select>
 </mapper>
+

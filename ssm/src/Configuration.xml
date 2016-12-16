@@ -21,4 +21,5 @@
 	<mappers>
 		<mapper resource="com/dz/mybatis/entity/Person.xml" />
 	</mappers>
+	
 </configuration>
